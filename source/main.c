@@ -65,32 +65,17 @@ int main(int argc, const char* argv[])
 
 				bool control_up = paddata.BTN_UP || paddata.ANA_L_V < 80;
 				bool control_down = paddata.BTN_DOWN || paddata.ANA_L_V > 176;
-				bool control_any = paddata.BTN_CIRCLE || paddata.BTN_CROSS;
+				bool control_any = paddata.BTN_CIRCLE || paddata.BTN_CROSS || paddata.BTN_TRIANGLE || paddata.BTN_SQUARE || BTN_START;
 				
 				switch(game_state)
 				{
 					case 0:
 					{
-						if(control_up && !old_control_up && can_click)
-						{
-							if(lang<2)
-							{
-								printf("Language toggle\n");
-								lang++;
-							}
-						}
-						if(control_down && !old_control_down && can_click)
-						{
-							if(lang>0)
-							{
-								printf("Language toggle\n");
-								lang--;
-							}
-						}
+						if(control_up && !old_control_up && can_click && lang<2) lang++;
+						if(control_down && !old_control_down && can_click && lang>0) lang--;
 						
 						if(paddata.BTN_CROSS && !oldpad.BTN_CROSS && can_click)
 						{
-							printf("Language selected\n");
 							bg_temp = 0;
 							FadeInOut(&game_state, 1);
 						}
@@ -100,12 +85,7 @@ int main(int argc, const char* argv[])
 					{
 						if(control_any && !old_control_any && can_click)
 						{
-							printf("BG_TEMP changed\n");
-							if(bg_temp>=2)
-							{
-								printf("Now on Title!\n");
-								FadeInOut(&game_state, 2);
-							}
+							if(bg_temp>=2) FadeInOut(&game_state, 2);
 							else FadeInOut(&bg_temp, bg_temp+1);
 						}
 						break;
@@ -114,7 +94,6 @@ int main(int argc, const char* argv[])
 					{
 						if(control_any && !old_control_any && can_click)
 						{
-							printf("Intro plays\n");
 							bg_temp = 0;
 							FadeInOut(&game_state, 3);
 						}
@@ -124,10 +103,8 @@ int main(int argc, const char* argv[])
 					{
 						if(control_any && !old_control_any && can_click)
 						{
-							printf("BG_TEMP changed\n");
 							if(bg_temp>=3)
 							{
-								printf("Now in-game!\n");
 								main_bg = RandRange(0, 5);
 								FadeInOut(&game_state, 4);
 							}
@@ -148,7 +125,7 @@ int main(int argc, const char* argv[])
 					default: break;
 				}
 				
-				if(paddata.BTN_START && !oldpad.BTN_START) sysProcessExit(0);
+				if(paddata.BTN_SELECT && !oldpad.BTN_SELECT) sysProcessExit(0);
 				
 				old_control_left = control_left;
 				old_control_right = control_right;

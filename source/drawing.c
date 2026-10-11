@@ -126,7 +126,7 @@ void DrawFade()
     u32 color = alpha;
     color = 0x00000000 | alpha;
 	
-	DrawBackground2D(color, -8);
+	DrawBackground2D(color, -2);
 }
 
 void drawScene()
@@ -184,7 +184,7 @@ void LoadTexture()
 {
 	int g;
 	
-    u32 * texture_mem = tiny3d_AllocTexture(48*1024*1024);
+    u32 * texture_mem = tiny3d_AllocTexture(64*1024*1024);
     if(!texture_mem) return;
     texture_pointer = texture_mem;
 	
