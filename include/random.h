@@ -33,4 +33,25 @@ void Initialize();
 
 float lerp(int x, int y, float amount);
 
+typedef struct
+{
+    bool active;
+    int type;
+
+    float x;
+    float y;
+
+    float vx;
+    float vy;
+} Entity;
+
+#define MAX_ENTITIES 256
+
+#define E_PLAYER_PROJECTILE 0
+
+Entity entities[MAX_ENTITIES];
+
+void UpdateEntities(float dt);
+void SpawnEntity(float x, float y, float vx, float vy, int type);
+
 #endif

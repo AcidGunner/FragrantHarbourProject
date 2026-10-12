@@ -70,6 +70,7 @@ void Load_PNG()
 	pngLoadFromBuffer(back_bin, back_bin_size, &spritesheet[4]);
 	pngLoadFromBuffer(projectile_bin, projectile_bin_size, &spritesheet[5]);
 	pngLoadFromBuffer(player_bin, player_bin_size, &spritesheet[6]);
+	pngLoadFromBuffer(bullet_bin, bullet_bin_size, &spritesheet[7]);
 }
 
 void Initialize()
@@ -82,4 +83,40 @@ void Initialize()
 	sysSpuImageImport(&spu_image, spu_soundmodule_bin, 0);
 	sysSpuRawImageLoad(spu, &spu_image);
 	SND_Init(spu);
+}
+
+void UpdateEntities(float dt)
+{
+    int i;
+
+    for(i = 0; i < MAX_ENTITIES; i++)
+    {
+        Entity *e = &entities[i];
+
+        if(!e->active) continue;
+		
+		e->x += e->vx * dt;
+		e->y += e->vy * dt;
+		
+        if(e->y < -60 || e->y > 300) e->active = 0;
+    }
+}
+
+void SpawnEntity(float x, float y, float vx, float vy, int type)
+{
+    int i;
+
+    for(i = 0; i < MAX_ENTITIES; i++)
+    {
+        if(!entities[i].active)
+        {
+            entities[i].active = true;
+            entities[i].x = x;
+            entities[i].y = y;
+            entities[i].vx = vx;
+            entities[i].vy = vy;
+            entities[i].type = type;
+            return;
+        }
+    }
 }

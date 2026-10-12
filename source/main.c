@@ -11,6 +11,7 @@ bool old_control_right = false;
 bool old_control_up = false;
 bool old_control_down = false;
 bool old_control_any = false;
+bool old_control_shoot = false;
 
 int frame = 0;
 
@@ -48,6 +49,7 @@ int main(int argc, const char* argv[])
 		UpdateFPS();
 		
 		UpdateFade(1.0f / 60.0f);
+		UpdateEntities(1.0f / 60.0f);
 		
         tiny3d_Clear(0xff000000, TINY3D_CLEAR_ALL);
 		tiny3d_AlphaTest(1, 0x10, TINY3D_ALPHA_FUNC_GEQUAL);
@@ -68,6 +70,7 @@ int main(int argc, const char* argv[])
 				bool control_up = paddata.BTN_UP || paddata.ANA_L_V < 80;
 				bool control_down = paddata.BTN_DOWN || paddata.ANA_L_V > 176;
 				bool control_any = paddata.BTN_CIRCLE || paddata.BTN_CROSS || paddata.BTN_TRIANGLE || paddata.BTN_SQUARE || paddata.BTN_START;
+				bool control_shoot = paddata.BTN_CIRCLE || paddata.BTN_CROSS;
 				
 				switch(game_state)
 				{
@@ -76,7 +79,7 @@ int main(int argc, const char* argv[])
 						if(control_up && !old_control_up && can_click && lang<2) lang++;
 						if(control_down && !old_control_down && can_click && lang>0) lang--;
 						
-						if(paddata.BTN_CROSS && !oldpad.BTN_CROSS && can_click)
+						if(control_shoot && !old_control_shoot && can_click)
 						{
 							bg_temp = 0;
 							FadeInOut(&game_state, 1);
@@ -138,6 +141,11 @@ int main(int argc, const char* argv[])
 							if(control_up) player_anim = 1; else player_anim = 0;
 						}
 						
+						if(control_shoot && !old_control_shoot)
+						{
+							SpawnEntity(player_x, player_y, 0, -150, 0);
+						}
+						
 						break;
 					}
 					default: break;
@@ -150,6 +158,7 @@ int main(int argc, const char* argv[])
 				old_control_up = control_up;
 				old_control_down = control_down;
 				old_control_any = control_any;
+				old_control_shoot = control_shoot;
 				
 				oldpad = paddata;
 			}

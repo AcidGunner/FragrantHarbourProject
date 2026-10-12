@@ -129,6 +129,28 @@ void DrawFade()
 	DrawBackground2D(color, -2);
 }
 
+void DrawEntities(int frames)
+{
+    int i;
+
+    for(i = 0; i < MAX_ENTITIES; i++)
+    {
+        Entity *e = &entities[i];
+        if(!e->active) continue;
+		
+		switch(e->type)
+		{
+			case 0:
+			{
+				SetTexture(7);
+				DrawFull(e->x - 2, e->y - 3.5f, 4, 7, 0, c_white);
+				break;
+			}
+			default: break;
+		}
+	}
+}
+
 void drawScene()
 {
 	static int frames = 0;
@@ -169,11 +191,13 @@ void drawScene()
 			SetTexture(4);
 			DrawSprite2D(main_bg*4, 0, 0, 256, 224, 256, 224, 256*4, 224*6, 1, c_white);
 			SetTexture(6);
-			DrawSprite2D(player_anim, player_x-(16*player_xscale), player_y-20, 32*player_xscale, 40, 32, 40, 224, 40, 0, c_white);
+			DrawSprite2D(player_anim, player_x-(16*player_xscale), player_y-20, 32*player_xscale, 40, 32, 40, 224, 40, -1, c_white);
 			break;
 		}
 		default: break;
 	}
+	
+	DrawEntities(frames);
 	
 	DrawFade();
 }
