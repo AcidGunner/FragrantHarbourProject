@@ -168,8 +168,8 @@ void drawScene()
 		{
 			SetTexture(4);
 			DrawSprite2D(main_bg*4, 0, 0, 256, 224, 256, 224, 256*4, 224*6, 1, c_white);
-			SetTexture(5);
-			DrawSprite2D((float)frames/5, player_x, player_y, 13, 16, 13, 16, 65, 16, 0, c_white);
+			SetTexture(6);
+			DrawSprite2D(player_anim, player_x-(16*player_xscale), player_y-20, 32*player_xscale, 40, 32, 40, 224, 40, 0, c_white);
 			break;
 		}
 		default: break;

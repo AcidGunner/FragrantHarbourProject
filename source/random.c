@@ -24,6 +24,8 @@ bool can_click = true;
 int player_x = 0;
 int player_y = 0;
 int player_speed = 1;
+int player_anim = 0;
+int player_xscale = 1;
 
 void UpdateFPS()
 {
@@ -67,6 +69,7 @@ void Load_PNG()
 	pngLoadFromBuffer(intro_bin, intro_bin_size, &spritesheet[3]);
 	pngLoadFromBuffer(back_bin, back_bin_size, &spritesheet[4]);
 	pngLoadFromBuffer(projectile_bin, projectile_bin_size, &spritesheet[5]);
+	pngLoadFromBuffer(player_bin, player_bin_size, &spritesheet[6]);
 }
 
 void Initialize()

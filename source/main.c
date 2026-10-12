@@ -12,6 +12,8 @@ bool old_control_up = false;
 bool old_control_down = false;
 bool old_control_any = false;
 
+int frame = 0;
+
 int main(int argc, const char* argv[])
 {
 	padInfo padinfo;
@@ -65,7 +67,7 @@ int main(int argc, const char* argv[])
 
 				bool control_up = paddata.BTN_UP || paddata.ANA_L_V < 80;
 				bool control_down = paddata.BTN_DOWN || paddata.ANA_L_V > 176;
-				bool control_any = paddata.BTN_CIRCLE || paddata.BTN_CROSS || paddata.BTN_TRIANGLE || paddata.BTN_SQUARE || BTN_START;
+				bool control_any = paddata.BTN_CIRCLE || paddata.BTN_CROSS || paddata.BTN_TRIANGLE || paddata.BTN_SQUARE || paddata.BTN_START;
 				
 				switch(game_state)
 				{
@@ -119,6 +121,22 @@ int main(int argc, const char* argv[])
 						
 						if(control_left) player_x-=player_speed;
 						if(control_right) player_x+=player_speed;
+						
+						if(control_left || control_right)
+						{
+							if(control_right) player_xscale = -1;
+							else player_xscale = 1;
+							
+							frame++;
+							int test = (float)frame/5;
+							player_anim = 2+(test % 5);
+						}
+						else
+						{
+							player_xscale = 1;
+							frame = 0;
+							if(control_up) player_anim = 1; else player_anim = 0;
+						}
 						
 						break;
 					}

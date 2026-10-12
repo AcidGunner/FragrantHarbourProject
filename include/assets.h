@@ -7,6 +7,7 @@
 #include "intro_bin.h"
 #include "back_bin.h"
 #include "projectile_bin.h"
+#include "player_bin.h"
 
 #include "loop_bin.h"
 

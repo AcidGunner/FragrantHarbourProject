@@ -3,7 +3,7 @@
 
 #include <pngdec/pngdec.h>
 
-#define TOTAL_SHEETS 6
+#define TOTAL_SHEETS 10
 pngData spritesheet[TOTAL_SHEETS];
 u32 sprite_off[TOTAL_SHEETS];
 
@@ -14,6 +14,8 @@ extern int lang;
 extern int player_x;
 extern int player_y;
 extern int player_speed;
+extern int player_anim;
+extern int player_xscale;
 
 extern bool can_click;
 
