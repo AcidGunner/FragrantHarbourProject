@@ -16,8 +16,10 @@ extern int player_y;
 extern int player_speed;
 extern int player_anim;
 extern int player_xscale;
+extern int score;
 
 extern bool can_click;
+extern bool show_fps;
 
 const char *bgm;
 void PlayBGM();

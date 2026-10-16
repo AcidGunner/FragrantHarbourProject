@@ -20,12 +20,14 @@ int bg_temp = 0;
 int lang = 2;
 
 bool can_click = true;
+bool show_fps = false;
 
 int player_x = 0;
 int player_y = 0;
 int player_speed = 1;
 int player_anim = 0;
 int player_xscale = 1;
+int score = 0;
 
 void UpdateFPS()
 {
@@ -71,6 +73,7 @@ void Load_PNG()
 	pngLoadFromBuffer(projectile_bin, projectile_bin_size, &spritesheet[5]);
 	pngLoadFromBuffer(player_bin, player_bin_size, &spritesheet[6]);
 	pngLoadFromBuffer(bullet_bin, bullet_bin_size, &spritesheet[7]);
+	pngLoadFromBuffer(numbers_bin, numbers_bin_size, &spritesheet[8]);
 }
 
 void Initialize()

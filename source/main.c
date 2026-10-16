@@ -1,3 +1,15 @@
+/*
+
+Fragrant harbour means Hong kong.
+You get the idea.
+
+probably asking why i did THIS for ps3
+well im an idiot :P
+
+- acidnt3.1
+
+*/
+
 #include <tiny3d.h>
 
 #include "soundlib/spu_soundlib.h"
@@ -38,8 +50,10 @@ int main(int argc, const char* argv[])
     
 	player_x = 256/2;
 	player_y = 244/2;
+	score = 0;
 	
-	usleep(150000);
+	// wait pls before doing anything stupid
+	usleep(979797);
     
     PlayBGM();
 
@@ -86,7 +100,7 @@ int main(int argc, const char* argv[])
 						}
 						break;
 					}
-					case 1:
+					case 1: case 5:
 					{
 						if(control_any && !old_control_any && can_click)
 						{
@@ -100,6 +114,7 @@ int main(int argc, const char* argv[])
 						if(control_any && !old_control_any && can_click)
 						{
 							bg_temp = 0;
+							score = 0;
 							FadeInOut(&game_state, 3);
 						}
 						break;
@@ -151,7 +166,7 @@ int main(int argc, const char* argv[])
 					default: break;
 				}
 				
-				if(paddata.BTN_SELECT && !oldpad.BTN_SELECT) sysProcessExit(0);
+				if(paddata.BTN_SELECT && !oldpad.BTN_SELECT) show_fps = !show_fps;
 				
 				old_control_left = control_left;
 				old_control_right = control_right;

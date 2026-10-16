@@ -126,7 +126,7 @@ void DrawFade()
     u32 color = alpha;
     color = 0x00000000 | alpha;
 	
-	DrawBackground2D(color, -2);
+	DrawBackground2D(color, -4);
 }
 
 void DrawEntities(int frames)
@@ -168,9 +168,9 @@ void drawScene()
 			DrawSprite2D((float)frames/5, 56, 138+((2-lang)*16), 13, 16, 13, 16, 65, 16, 0, c_white);
 			break;
 		}
-		case 1:
+		case 1: case 5:
 		{
-			SetTexture(1);
+			if(game_state==1) SetTexture(1); else SetTexture();
 			DrawSprite2D((bg_temp*3)+lang, 0, 0, 256, 224, 256, 224, 256*3, 224*3, 1, c_white);
 			break;
 		}
@@ -192,9 +192,33 @@ void drawScene()
 			DrawSprite2D(main_bg*4, 0, 0, 256, 224, 256, 224, 256*4, 224*6, 1, c_white);
 			SetTexture(6);
 			DrawSprite2D(player_anim, player_x-(16*player_xscale), player_y-20, 32*player_xscale, 40, 32, 40, 224, 40, -1, c_white);
+			
+			SetTexture(8);
+			int temp_score = score; 
+			for(int i = 0; i < 9; i++)
+			{
+				int divisor = 1;
+				for(int p = 0; p < (8-i); p++) divisor *= 10;
+				int num = (temp_score/divisor) % 10;
+				
+				DrawSprite2D(num, 97+(i*16), 3, 16, 16, 16, 16, 80, 32, -2, c_white);
+			}
 			break;
 		}
 		default: break;
+	}
+	
+	if(show_fps)
+	{
+		SetTexture(8);
+		int cur_fps = fps; 
+		for(int i = 0; i < 2; i++)
+		{
+			int divisor = (i == 0) ? 10 : 1;
+			int num = (cur_fps/divisor) % 10;
+			
+			DrawSprite2D(num, 3+(i*16), 3, 16, 16, 16, 16, 80, 32, -5, c_white);
+		}
 	}
 	
 	DrawEntities(frames);

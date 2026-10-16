@@ -9,6 +9,7 @@
 #include "projectile_bin.h"
 #include "player_bin.h"
 #include "bullet_bin.h"
+#include "numbers_bin.h"
 
 #include "loop_bin.h"
 
