@@ -170,7 +170,7 @@ void drawScene()
 		}
 		case 1: case 5:
 		{
-			if(game_state==1) SetTexture(1); else SetTexture();
+			if(game_state==1) SetTexture(1);// else SetTexture();
 			DrawSprite2D((bg_temp*3)+lang, 0, 0, 256, 224, 256, 224, 256*3, 224*3, 1, c_white);
 			break;
 		}
